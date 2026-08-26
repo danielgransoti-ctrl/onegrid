@@ -1,0 +1,4 @@
+# saídas geradas — o build recria quando precisar
+dist/
+__pycache__/
+*.pyc
