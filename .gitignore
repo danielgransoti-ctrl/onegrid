@@ -2,3 +2,6 @@
 dist/
 __pycache__/
 *.pyc
+
+# a pasta deploy/ foi removida: a raiz do repositório é o site
+deploy/

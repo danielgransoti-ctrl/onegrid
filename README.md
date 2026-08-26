@@ -58,11 +58,16 @@ site-one-grid/
 │   ├── img/                 imagens tratadas do site
 │   ├── fonts/               Satoshi + Inria Serif (fontes da marca, .woff2)
 │   └── logo/                logo One Grid e favicons
+├── robots.txt / sitemap.xml / vercel.json   arquivos do site publicado
 ├── _fontes/                 imagens de origem usadas por prepare-images.py
 ├── prepare-images.py        regenera assets/img a partir dos criativos
 ├── build-single-file.py     gera versão de arquivo único em dist/
 └── dist/                    saídas de arquivo único
 ```
+
+A raiz do repositório **é** o site. O `.vercelignore` mantém fora do ar os
+scripts, o `_fontes/`, o `dist/` e o README — eles ficam versionados, mas não
+são publicados.
 
 ---
 
@@ -190,17 +195,18 @@ const SITE_CONFIG = {
 };
 ```
 
-Depois rode `python prepare-images.py` só se tiver mexido em imagem, e copie
-`index.html` + `assets/` para `deploy/` de novo.
+Depois rode `python prepare-images.py` só se tiver mexido em imagem.
 
 ### 2. Subir no Vercel
 
 1. Entre em [vercel.com](https://vercel.com) e crie a conta (o plano free
    atende de sobra um site estático).
-2. **Add New → Project → Deploy** e arraste a pasta `deploy/` inteira, ou o
-   arquivo `dist/one-grid-site.zip`.
+2. **Add New → Project → Import Git Repository** e escolha o repositório.
+   Deixe **Root Directory vazio** — a raiz do repositório já é o site.
 3. O Vercel gera uma URL provisória (`algo.vercel.app`). Abra e confira o site
    inteiro antes de mexer no domínio.
+
+Depois disso, publicar é dar `git push` na branch `main`.
 
 ### 3. Ligar o domínio
 

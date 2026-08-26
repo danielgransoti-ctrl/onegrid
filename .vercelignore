@@ -1,0 +1,6 @@
+# fora do site publicado — ficam no repositório, mas não vão para o ar
+_fontes/
+dist/
+*.py
+README.md
+.gitignore
