@@ -248,7 +248,7 @@ if (hero) {
    -------------------------------------------------------------------------- */
 const xray = document.getElementById("xrayFig");
 if (xray) {
-  const raio = () => Math.max(120, Math.min(260, xray.clientWidth * 0.22));
+  const raio = () => Math.max(78, Math.min(160, xray.clientWidth * 0.125));
   const mover = (x, y) => {
     const r = xray.getBoundingClientRect();
     xray.style.setProperty("--mx", (x - r.left) + "px");
