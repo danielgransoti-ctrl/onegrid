@@ -152,7 +152,102 @@ document.querySelectorAll(".reveal").forEach((el, i) => {
 });
 
 /* --------------------------------------------------------------------------
-   6) ANATOMIA — pontos interativos no corte do simulador
+   6) BANNER — a sequencia de video avanca conforme a pessoa rola
+   -------------------------------------------------------------------------- */
+const hero = document.getElementById("hero");
+if (hero) {
+  const shots = [...hero.querySelectorAll(".hero__vid")];
+  const lines = [...hero.querySelectorAll(".hero__lines p")];
+  const heroIn = document.getElementById("heroIn");
+  const heroHint = document.getElementById("heroHint");
+
+  // Video pesa ~9 MB. Fica de fora em tela pequena, em conexao economica e
+  // para quem pediu menos animacao — nesses casos a foto continua valendo.
+  const telaGrande = window.matchMedia("(min-width: 900px)").matches;
+  const menosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const economiaDados = navigator.connection && navigator.connection.saveData;
+
+  const temVideo = shots.length > 0 && shots.every(v => v.dataset.src);
+
+  if (!temVideo || !telaGrande || menosMovimento || economiaDados) {
+    hero.classList.add("is-static");
+    shots.forEach(v => v.remove());
+  } else {
+    hero.classList.add("has-video");
+    shots.forEach(v => { v.src = v.dataset.src; v.load(); });
+
+    const duracoes = [6.04, 6.04, 8.04];      // lidas dos proprios arquivos
+    const total = duracoes.reduce((a, b) => a + b, 0);
+    const INICIO = 0.06;                       // antes disso, so o titulo
+    let ultimo = -1;
+
+    const desenhar = () => {
+      const alcance = hero.offsetHeight - window.innerHeight;
+      const p = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / alcance));
+
+      // titulo sai de cena assim que a sequencia comeca
+      const saida = Math.max(0, Math.min(1, (p - INICIO) / 0.12));
+      heroIn.classList.toggle("is-off", saida > 0.5);
+      heroHint.classList.toggle("is-off", p > INICIO);
+
+      // tempo global dentro dos tres clipes
+      const t = Math.max(0, (p - INICIO) / (1 - INICIO)) * total;
+      let acc = 0, atual = 0, dentro = 0;
+      for (let i = 0; i < duracoes.length; i++) {
+        if (t <= acc + duracoes[i] || i === duracoes.length - 1) { atual = i; dentro = t - acc; break; }
+        acc += duracoes[i];
+      }
+      if (atual !== ultimo) {
+        shots.forEach((v, i) => v.classList.toggle("is-on", i === atual));
+        ultimo = atual;
+      }
+      const v = shots[atual];
+      const alvo = Math.max(0, Math.min(dentro, duracoes[atual] - 0.05));
+      if (v.readyState >= 2 && Math.abs(v.currentTime - alvo) > 0.04) v.currentTime = alvo;
+
+      // as frases se revezam na segunda metade da sequencia
+      const faixa = Math.max(0, Math.min(1, (p - 0.22) / 0.7));
+      const ativa = faixa <= 0 || faixa >= 1 ? -1 : Math.min(lines.length - 1, Math.floor(faixa * lines.length));
+      lines.forEach((l, i) => l.classList.toggle("is-on", i === ativa));
+    };
+
+    window.addEventListener("scroll", desenhar, { passive: true });
+    window.addEventListener("resize", desenhar);
+    desenhar();
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7) RAIO-X — a carenagem fica transparente onde o cursor passa
+   -------------------------------------------------------------------------- */
+const xray = document.getElementById("xrayFig");
+if (xray) {
+  const raio = () => Math.max(120, Math.min(260, xray.clientWidth * 0.22));
+  const mover = (x, y) => {
+    const r = xray.getBoundingClientRect();
+    xray.style.setProperty("--mx", (x - r.left) + "px");
+    xray.style.setProperty("--my", (y - r.top) + "px");
+    xray.style.setProperty("--mr", raio() + "px");
+    xray.classList.add("is-open");
+  };
+  xray.addEventListener("mousemove", e => mover(e.clientX, e.clientY));
+  xray.addEventListener("mouseleave", () => {
+    xray.style.setProperty("--mr", "0px");
+    xray.classList.remove("is-open");
+  });
+  // no celular nao ha cursor: mostra o interior ao tocar
+  xray.addEventListener("touchmove", e => {
+    const t = e.touches[0];
+    if (t) mover(t.clientX, t.clientY);
+  }, { passive: true });
+  xray.addEventListener("touchend", () => {
+    xray.style.setProperty("--mr", "0px");
+    xray.classList.remove("is-open");
+  });
+}
+
+/* --------------------------------------------------------------------------
+   8) ANATOMIA — pontos interativos no corte do simulador
    -------------------------------------------------------------------------- */
 const hots = document.querySelectorAll(".hot");
 const items = document.querySelectorAll(".anatomy__list li");
@@ -172,7 +267,7 @@ items.forEach(li => {
 setHot(1);
 
 /* --------------------------------------------------------------------------
-   7) FORMULÁRIO — etapas, validação e envio
+   9) FORMULÁRIO — etapas, validação e envio
    -------------------------------------------------------------------------- */
 const form = document.getElementById("leadForm");
 const steps = [...document.querySelectorAll(".fstep")];
@@ -360,7 +455,7 @@ form.addEventListener("submit", async ev => {
 });
 
 /* --------------------------------------------------------------------------
-   8) BOOT
+   10) BOOT
    -------------------------------------------------------------------------- */
 document.getElementById("year").textContent = new Date().getFullYear();
 showStep(0);

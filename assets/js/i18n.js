@@ -29,6 +29,13 @@ en: {
   "hero.from": "From",
   "hero.price": "R$ 299,000",
 
+  "hero.hint": "Scroll. Lights out.",
+  "seq.1": "This is not a replay.",
+  "seq.2": "Every braking point, earned.",
+  "seq.3": "The line doesn't forgive.",
+  "seq.4": "Same reflexes. Same stakes.",
+  "seq.5": "The grid never blinks.",
+
   "tick.1": "full scale",
   "tick.2": "of motion",
   "tick.3": "wheel",
@@ -46,6 +53,15 @@ en: {
   "s01.p3.d": "Automotive paint, hand-laid composite, color and livery chosen by you. It belongs next to your cars.",
 
   "band.q": "The g-force is simulated. The adrenaline is real.",
+
+  "claim.a": "We build the machines.",
+  "claim.b": "We hand you the keys.",
+
+  "xray.eyebrow": "The flagship",
+  "xray.h2": "Built like a race car. Engineered like a machine.",
+  "xray.prompt": "Hover to look inside",
+  "xray.cap": "The platform underneath the bodywork.",
+  "xray.support": "Every layer, engineered.",
 
   "s02.label": "The experience",
   "s02.h2": "You feel it before you see it.",
@@ -99,6 +115,7 @@ en: {
   "s05.label": "Specifications",
   "s05.h2": "One Grid Formula",
   "s05.lead": "A formula cockpit, immersive motion and a wraparound display — a driving experience that takes over the room.",
+  "s05.narr": "From the outside, it reads like a race car: a full-scale single-seater with the same proportions, the same tension in every line. Underneath the molded bodywork is where the One Grid earns the comparison.",
   "s05.note": "Specifications are indicative and configurable. The final build is defined in the design of your space.",
   "s05.cta": "Request a proposal",
   "s05.k1": "Driving position",  "s05.v1": "Formula, reclined",
@@ -273,6 +290,13 @@ pt: {
   "hero.from": "A partir de",
   "hero.price": "R$ 299 mil",
 
+  "hero.hint": "Role. Semáforo apagando.",
+  "seq.1": "Isto não é replay.",
+  "seq.2": "Cada ponto de frenagem, conquistado.",
+  "seq.3": "O traçado não perdoa.",
+  "seq.4": "Mesmos reflexos. Mesmo risco.",
+  "seq.5": "O grid não pisca.",
+
   "tick.1": "escala real",
   "tick.2": "movimento",
   "tick.3": "volante",
@@ -290,6 +314,15 @@ pt: {
   "s01.p3.d": "Pintura automotiva, fibra moldada à mão, cor e grafismo definidos por você. Ele fica bem ao lado dos seus carros.",
 
   "band.q": "A força G é simulada. A adrenalina é real.",
+
+  "claim.a": "Nós construímos as máquinas.",
+  "claim.b": "Entregamos a chave na sua mão.",
+
+  "xray.eyebrow": "O carro-chefe",
+  "xray.h2": "Construído como um carro de corrida. Projetado como uma máquina.",
+  "xray.prompt": "Passe o mouse para ver por dentro",
+  "xray.cap": "A plataforma sob a carenagem.",
+  "xray.support": "Cada camada, projetada.",
 
   "s02.label": "A experiência",
   "s02.h2": "Você sente antes de ver.",
@@ -343,6 +376,7 @@ pt: {
   "s05.label": "Especificações",
   "s05.h2": "One Grid Formula",
   "s05.lead": "Cockpit de fórmula, movimento imersivo e display envolvente, uma experiência de pilotagem que toma conta do espaço.",
+  "s05.narr": "De fora, ele se lê como um carro de corrida: um monoposto em escala real, com as mesmas proporções e a mesma tensão em cada linha. É embaixo da carenagem moldada que o One Grid justifica a comparação.",
   "s05.note": "Especificações indicativas e configuráveis. A configuração final é definida no projeto do seu espaço.",
   "s05.cta": "Pedir proposta",
   "s05.k1": "Posição de pilotagem", "s05.v1": "Fórmula, reclinada",

@@ -60,35 +60,52 @@
 <main id="top">
 
 <!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="hero__bg"><img src="assets/img/hero-garagem.jpg" alt="" aria-hidden="true"></div>
-
-  <img class="seal seal--hero" src="assets/logo/selo-worlds-best.webp"
-       alt="World's Best Racing Simulator" width="440" height="444"
-       data-i18n-attr="alt:badge.alt">
-
-  <div class="hero__in wrap">
-    <p class="eyebrow reveal" data-i18n="hero.eyebrow">One Grid Formula · Full-scale 1:1 cockpit</p>
-    <h1 class="hero__h1 reveal">
-      <span data-i18n="hero.h1a">The world's best</span><br>
-      <em data-i18n="hero.h1b">racing simulator.</em>
-    </h1>
-    <p class="hero__lead reveal" data-i18n="hero.lead">Your body feels the braking, the rear stepping out and the load through the corner before your eyes catch up.</p>
-    <div class="hero__cta reveal">
-      <a class="btn" href="#form" data-i18n="hero.cta1">I want one</a>
-      <a class="btn btn--ghost" href="#simulator" data-i18n="hero.cta2">See the machine</a>
+<section class="hero" id="hero">
+  <div class="hero__sticky">
+    <div class="hero__bg" id="heroBg">
+      <img src="assets/img/hero-garagem.jpg" alt="" aria-hidden="true">
+      <video class="hero__vid" data-shot="0" data-src="assets/video/hero-1.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+      <video class="hero__vid" data-shot="1" data-src="assets/video/hero-2.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+      <video class="hero__vid" data-shot="2" data-src="assets/video/hero-3.mp4" muted playsinline preload="none" aria-hidden="true"></video>
     </div>
-    <p class="hero__price reveal"><span data-i18n="hero.from">From</span> <strong data-i18n="hero.price">R$ 299,000</strong></p>
-  </div>
 
-  <ul class="ticker" aria-label="Highlights">
-    <li><b>1:1</b><span data-i18n="tick.1">full scale</span></li>
-    <li><b>2–3 DOF</b><span data-i18n="tick.2">of motion</span></li>
-    <li><b>Direct-drive</b><span data-i18n="tick.3">wheel</span></li>
-    <li><b>Load-cell</b><span data-i18n="tick.4">pedals</span></li>
-    <li><b>49"</b><span data-i18n="tick.5">curved or triple</span></li>
-  </ul>
+    <img class="seal seal--hero" src="assets/logo/selo-worlds-best.webp"
+         alt="World's Best Racing Simulator" width="440" height="444"
+         data-i18n-attr="alt:badge.alt">
+
+    <div class="hero__in" id="heroIn">
+      <p class="eyebrow reveal" data-i18n="hero.eyebrow">One Grid Formula · Full-scale 1:1 cockpit</p>
+      <h1 class="hero__h1 reveal">
+        <span data-i18n="hero.h1a">The world's best</span><br>
+        <em data-i18n="hero.h1b">racing simulator.</em>
+      </h1>
+      <p class="hero__lead reveal" data-i18n="hero.lead">Your body feels the braking, the rear stepping out and the load through the corner before your eyes catch up.</p>
+      <div class="hero__cta reveal">
+        <a class="btn" href="#form" data-i18n="hero.cta1">I want one</a>
+        <a class="btn btn--ghost" href="#simulator" data-i18n="hero.cta2">See the machine</a>
+      </div>
+      <p class="hero__price reveal"><span data-i18n="hero.from">From</span> <strong data-i18n="hero.price">R$ 299,000</strong></p>
+    </div>
+
+    <div class="hero__lines" id="heroLines" aria-hidden="true">
+      <p data-line="0" data-i18n="seq.1">This is not a replay.</p>
+      <p data-line="1" data-i18n="seq.2">Every braking point, earned.</p>
+      <p data-line="2" data-i18n="seq.3">The line doesn't forgive.</p>
+      <p data-line="3" data-i18n="seq.4">Same reflexes. Same stakes.</p>
+      <p data-line="4" data-i18n="seq.5">The grid never blinks.</p>
+    </div>
+
+    <p class="hero__hint" id="heroHint" data-i18n="hero.hint">Scroll. Lights out.</p>
+  </div>
 </section>
+
+<ul class="ticker" aria-label="Highlights">
+  <li><b>1:1</b><span data-i18n="tick.1">full scale</span></li>
+  <li><b>2–3 DOF</b><span data-i18n="tick.2">of motion</span></li>
+  <li><b>Direct-drive</b><span data-i18n="tick.3">wheel</span></li>
+  <li><b>Load-cell</b><span data-i18n="tick.4">pedals</span></li>
+  <li><b>49"</b><span data-i18n="tick.5">curved or triple</span></li>
+</ul>
 
 <!-- ================= 01 · THE SIMULATOR ================= -->
 <section class="sec" id="simulator">
@@ -185,6 +202,14 @@
   </div>
 </section>
 
+<!-- ================= FAIXA · WE BUILD THE MACHINES ================= -->
+<section class="claim">
+  <div class="wrap">
+    <p class="claim__a reveal" data-i18n="claim.a">We build the machines.</p>
+    <p class="claim__b reveal" data-i18n="claim.b">We hand you the keys.</p>
+  </div>
+</section>
+
 <!-- ================= 03 · ATELIER ================= -->
 <section class="sec sec--atelier" id="atelier">
   <div class="wrap">
@@ -212,6 +237,26 @@
         </ol>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= DOBRA · RAIO-X ================= -->
+<section class="xray-sec" id="xray">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="label"><span data-i18n="xray.eyebrow">The flagship</span></p>
+      <h2 class="h2" data-i18n="xray.h2">Built like a race car. Engineered like a machine.</h2>
+    </header>
+
+    <figure class="xray reveal" id="xrayFig">
+      <img class="xray__base" src="assets/img/raiox-casco.jpg" alt="One Grid Formula bodywork" width="1792" height="1014" loading="lazy">
+      <img class="xray__in" src="assets/img/raiox-interno.jpg" alt="" aria-hidden="true" width="1792" height="1014" loading="lazy">
+      <figcaption>
+        <span class="xray__prompt" data-i18n="xray.prompt">Hover to look inside</span>
+        <span class="xray__cap" data-i18n="xray.cap">The platform underneath the bodywork.</span>
+      </figcaption>
+    </figure>
+    <p class="xray__support reveal" data-i18n="xray.support">Every layer, engineered.</p>
   </div>
 </section>
 
@@ -270,6 +315,7 @@
         <p class="label"><i>05</i> <span data-i18n="s05.label">Specifications</span></p>
         <h2 class="h2" data-i18n="s05.h2">One Grid Formula</h2>
         <p data-i18n="s05.lead">A formula cockpit, immersive motion and a wraparound display — a driving experience that takes over the room.</p>
+        <p class="specs__narr" data-i18n="s05.narr">From the outside, it reads like a race car: a full-scale single-seater with the same proportions, the same tension in every line. Underneath the molded bodywork is where the One Grid earns the comparison.</p>
         <p class="specs__note" data-i18n="s05.note">Specifications are indicative and configurable. The final build is defined in the design of your space.</p>
         <a class="btn" href="#form" data-i18n="s05.cta">Request a proposal</a>
       </div>

@@ -87,11 +87,13 @@ página já abre traduzida.
 
 | # | Seção | Conteúdo |
 |---|-------|----------|
-| — | Hero | "This is not a video game", zoom lento na foto de fundo, selo *World's Best Racing Simulator* |
+| — | Hero | sequência de vídeo controlada pelo scroll, selo *World's Best Racing Simulator* |
 | 01 | The simulator | os três pilares: escala 1:1, movimento, acabamento |
 | — | Faixa-manifesto | "The g-force is simulated. The adrenaline is real." |
 | 02 | The experience | movimento, comando e imersão, com foto grande em cada bloco |
+| — | Faixa de afirmação | "We build the machines. / We hand you the keys." |
 | 03 | Atelier | foto da oficina em zoom lento ao lado dos 8 componentes |
+| — | Raio-X | a carenagem fica transparente onde o cursor passa |
 | 04 | Engineering | corte do simulador ao centro, itens 01–03 à esquerda e 04–06 à direita, com 6 pontos interativos |
 | 05 | Specifications | ficha técnica do One Grid Formula |
 | 06 | Comparison | setup convencional × One Grid, foto ao lado da tabela |
@@ -128,12 +130,28 @@ Para trocar uma imagem, edite a lista `JOBS` no script e rode:
 python prepare-images.py
 ```
 
-### Zoom lento nas fotos
+### Sequência de vídeo no banner
 
-O hero e a foto do Ateliê usam a mesma animação (`heroZoom` no CSS): a imagem
-se aproxima devagar, de 1 para 1,16 em 26 segundos. No Ateliê ela só começa
-quando a seção entra na tela. Fica desligada para quem usa
-`prefers-reduced-motion`.
+O banner tem 340svh de altura e o miolo fica preso na tela (`position: sticky`).
+A posição do scroll define o quadro do vídeo — ele não toca sozinho. São três
+clipes em `assets/video/` (6s, 6s e 8s), trocados na ordem, com cinco frases
+entrando por cima e o título saindo de cena logo no começo.
+
+O vídeo soma 9 MB, então **fica de fora** em três casos, e aí vale a foto de
+sempre: tela menor que 900px, `prefers-reduced-motion` ligado, ou o navegador
+em modo de economia de dados. O ritmo está no bloco 6 do `app.js`.
+
+### Zoom lento na foto do Ateliê
+
+A foto da oficina usa a animação `heroZoom` do CSS: se aproxima devagar, de 1
+para 1,16 em 26 segundos, e só começa quando a seção entra na tela.
+
+### Raio-X
+
+Duas fotos do mesmo enquadramento sobrepostas — `raiox-casco.jpg` por cima e
+`raiox-interno.jpg` por baixo. A de cima é recortada por uma máscara radial que
+segue o cursor, então o interior aparece só onde o mouse está. No celular, o
+mesmo efeito responde ao toque. Bloco 7 do `app.js`.
 
 ### Montagem por scroll (fora do site hoje)
 

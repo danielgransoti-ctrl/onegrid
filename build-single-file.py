@@ -118,6 +118,10 @@ def build(as_artifact=False):
 
     html = re.sub(r'(src|href)="(assets/(?:img|logo)/[^"]+)"', sub_asset, html)
 
+    # Os vídeos do banner (9 MB) ficam de fora do arquivo único: sem a fonte,
+    # o site cai na foto de sempre em vez de mostrar um quadro preto.
+    html = re.sub(r'\s*data-src="assets/video/[^"]+"', "", html)
+
     os.makedirs(DIST, exist_ok=True)
 
     if as_artifact:
