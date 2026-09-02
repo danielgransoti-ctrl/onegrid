@@ -176,15 +176,25 @@ if (hero) {
     hero.classList.add("has-video");
     shots.forEach(v => { v.src = v.dataset.src; v.load(); });
 
-    // Os clipes tocam de verdade — o scroll decide qual deles esta em cena,
-    // nao o quadro. Alguns navegadores so liberam o autoplay depois de um
-    // gesto, entao tentamos de novo no primeiro toque ou rolagem.
-    const tocar = el => { const t = el.play(); if (t) t.catch(() => {}); };
-    const destravar = () => shots.forEach(v => { if (v.classList.contains("is-on")) tocar(v); });
+    // Os clipes nao tocam sozinhos: a rolagem e que avanca (descendo) ou
+    // retrocede (subindo) a cena. Sao 20s de video distribuidos ao longo da
+    // secao. Varios navegadores so renderizam um seek depois que o video foi
+    // tocado ao menos uma vez, entao damos um play/pause de partida.
+    const acordar = v => {
+      if (v.dataset.pronto) return;
+      v.dataset.pronto = "1";
+      const t = v.play();
+      if (t) t.then(() => v.pause()).catch(() => { delete v.dataset.pronto; });
+      else v.pause();
+    };
+    const acordarTodos = () => shots.forEach(acordar);
+    acordarTodos();
     ["pointerdown", "touchstart", "keydown", "wheel", "scroll"].forEach(ev =>
-      window.addEventListener(ev, destravar, { once: true, passive: true }));
+      window.addEventListener(ev, acordarTodos, { once: true, passive: true }));
 
-    const INICIO = 0.06;   // antes disso, so o titulo
+    const duracoes = [6.04, 6.04, 8.04];   // lidas dos proprios arquivos
+    const total = duracoes.reduce((a, b) => a + b, 0);
+    const INICIO = 0.06;                   // antes disso, so o titulo
     let ultimo = -1;
 
     const desenhar = () => {
@@ -194,17 +204,25 @@ if (hero) {
       heroIn.classList.toggle("is-off", p > INICIO + 0.06);
       heroHint.classList.toggle("is-off", p > INICIO);
 
-      // um clipe por terco da sequencia
-      const avanco = Math.max(0, (p - INICIO) / (1 - INICIO));
-      const atual = Math.min(shots.length - 1, Math.floor(avanco * shots.length));
+      // posicao dentro dos 20s, e em qual dos tres clipes ela cai
+      const tempo = Math.max(0, (p - INICIO) / (1 - INICIO)) * total;
+      let soma = 0, atual = 0, dentro = 0;
+      for (let i = 0; i < duracoes.length; i++) {
+        if (tempo <= soma + duracoes[i] || i === duracoes.length - 1) {
+          atual = i; dentro = tempo - soma; break;
+        }
+        soma += duracoes[i];
+      }
+
       if (atual !== ultimo) {
-        shots.forEach((v, i) => {
-          const ligado = i === atual;
-          v.classList.toggle("is-on", ligado);
-          if (ligado) tocar(v); else v.pause();
-        });
+        shots.forEach((v, i) => v.classList.toggle("is-on", i === atual));
         ultimo = atual;
       }
+
+      const v = shots[atual];
+      if (!v.paused) v.pause();
+      const alvo = Math.max(0, Math.min(dentro, duracoes[atual] - 0.05));
+      if (v.readyState >= 1 && Math.abs(v.currentTime - alvo) > 0.03) v.currentTime = alvo;
 
       // as frases se revezam ao longo da sequencia
       const faixa = Math.max(0, Math.min(1, (p - 0.2) / 0.72));
@@ -214,6 +232,7 @@ if (hero) {
 
     window.addEventListener("scroll", desenhar, { passive: true });
     window.addEventListener("resize", desenhar);
+    shots.forEach(v => v.addEventListener("loadeddata", desenhar, { once: true }));
     desenhar();
   }
 }

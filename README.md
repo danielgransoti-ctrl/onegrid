@@ -133,12 +133,14 @@ python prepare-images.py
 ### Sequência de vídeo no banner
 
 O banner tem 340svh de altura e o miolo fica preso na tela (`position: sticky`).
-São três clipes em `assets/video/` (6s, 6s e 8s) que **tocam em loop**; a
-posição do scroll decide qual deles está em cena e qual das cinco frases
+São três clipes em `assets/video/` (6s, 6s e 8s), 20 segundos ao todo. Eles
+**não tocam sozinhos**: a rolagem é que avança a cena descendo e retrocede
+subindo. A posição do scroll define o quadro exato e qual das cinco frases
 aparece por cima. O título sai de cena logo no começo.
 
-Alguns navegadores só liberam o autoplay depois de um gesto, então o código
-tenta tocar de novo no primeiro toque, clique ou rolagem.
+Vários navegadores só renderizam um seek depois que o vídeo foi tocado ao
+menos uma vez — por isso o código dá um `play()` seguido de `pause()` na
+partida, e tenta de novo no primeiro toque, clique ou rolagem.
 
 O vídeo soma 9 MB, então **fica de fora** em três casos, e aí vale a foto de
 sempre: tela menor que 900px, `prefers-reduced-motion` ligado, ou o navegador

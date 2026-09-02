@@ -159,9 +159,11 @@ ul,ol{list-style:none}
     linear-gradient(180deg,rgba(5,5,6,.88) 0%,rgba(5,5,6,.30) 30%,rgba(5,5,6,.72) 70%,var(--black) 100%),
     linear-gradient(90deg,rgba(5,5,6,.96) 0%,rgba(5,5,6,.80) 34%,rgba(5,5,6,.18) 72%,transparent 100%);
 }
+/* Mesma caixa do cabecalho, para o titulo comecar exatamente sob a logo.
+   O width:100% e necessario: sendo item flex com margem automatica, o bloco
+   encolheria ate o texto e sairia do alinhamento. */
 .hero__in{position:relative;z-index:2;padding-bottom:clamp(40px,7vw,84px);
-  /* mesma caixa do cabecalho, para o titulo comecar sob a logo */
-  max-width:1400px;margin-inline:auto;padding-inline:var(--pad)}
+  width:100%;max-width:1400px;margin-inline:auto;padding-inline:var(--pad)}
 /* O titulo tambem e limitado pela altura da janela: em tela baixa ou estreita
    ele encolhe em vez de estourar para cima, por baixo do menu. */
 .hero__h1{font-weight:900;font-size:min(clamp(36px,7.6vw,100px),13vh);
