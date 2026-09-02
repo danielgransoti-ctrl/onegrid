@@ -19,7 +19,8 @@
   --ink:#f5f5f6;
   --ink-2:#b5b5bb;
   --ink-3:#7c7c84;
-  /* rosa da marca — mesma familia do logotipo (#DB0045) */
+  /* Rosa da marca, o mesmo do site de referencia. O --red vale para todo
+     texto e fundo de destaque; o claro fica so para hover, foco e erro. */
   --red:#DB0143;
   --red-2:#FF3B6B;
   --red-hover:#FF0B55;
@@ -64,11 +65,11 @@ ul,ol{list-style:none}
 .h3{font-weight:900;font-size:clamp(22px,2.6vw,32px);line-height:1.08;letter-spacing:-.02em}
 .lead{color:var(--ink-2);font-size:clamp(16px,1.35vw,19px);max-width:62ch;margin-top:20px}
 .label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3)}
-.label i{font-style:normal;color:var(--red-2);font-weight:900;letter-spacing:.1em}
+.label i{font-style:normal;color:var(--red);font-weight:900;letter-spacing:.1em}
 .label::after{content:"";flex:1;height:1px;background:var(--hair);max-width:120px}
 .sechead--center .label{justify-content:center}
 .sechead--center .label::after{display:none}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red-2)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red)}
 
 /* ---------- Botões ---------- */
 .btn{
@@ -168,7 +169,7 @@ ul,ol{list-style:none}
    ele encolhe em vez de estourar para cima, por baixo do menu. */
 .hero__h1{font-weight:900;font-size:min(clamp(36px,7.6vw,100px),13vh);
   line-height:.88;letter-spacing:-.045em;text-transform:uppercase;margin:18px 0 0}
-.hero__h1 em{font-style:italic;color:var(--red-2);display:inline-block}
+.hero__h1 em{font-style:italic;color:var(--red);display:inline-block}
 .hero__lead{color:var(--ink-2);max-width:48ch;margin-top:26px;font-size:clamp(16px,1.5vw,19px)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 .hero__price{margin-top:22px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
@@ -194,7 +195,7 @@ ul,ol{list-style:none}
 /* ---------- Pilares ---------- */
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:64px;background:var(--hair-2)}
 .pillar{background:var(--black);padding:36px 30px 34px}
-.pillar__n{display:block;font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--red-2);margin-bottom:18px}
+.pillar__n{display:block;font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--red);margin-bottom:18px}
 .pillar h3{font-size:21px;font-weight:900;letter-spacing:-.02em;margin-bottom:10px}
 .pillar p{color:var(--ink-2);font-size:15.5px}
 
@@ -224,7 +225,7 @@ ul,ol{list-style:none}
 .split__txt p{color:var(--ink-2)}
 .ticks{margin-top:26px;display:grid;gap:11px}
 .ticks li{position:relative;padding-left:24px;font-size:15px;color:var(--ink-2)}
-.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1.5px;background:var(--red-2)}
+.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1.5px;background:var(--red)}
 
 /* ==========================================================================
    FAIXA DE AFIRMACAO
@@ -233,7 +234,7 @@ ul,ol{list-style:none}
   background:linear-gradient(180deg,var(--black) 0%,#0b070a 50%,var(--black) 100%)}
 .claim p{font-weight:900;font-size:clamp(30px,6.4vw,86px);line-height:.96;
   letter-spacing:-.04em;text-transform:uppercase;text-wrap:balance}
-.claim__b{color:var(--red-2)}
+.claim__b{color:var(--red)}
 
 /* ==========================================================================
    DOBRA RAIO-X
@@ -250,7 +251,7 @@ ul,ol{list-style:none}
   justify-content:space-between;gap:10px;padding:14px 18px;
   background:linear-gradient(180deg,transparent,rgba(5,5,6,.85));
   font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.xray__prompt{color:var(--red-2);font-weight:700;transition:opacity .3s}
+.xray__prompt{color:var(--red);font-weight:700;transition:opacity .3s}
 .xray.is-open .xray__prompt{opacity:0}
 .xray__cap{color:var(--ink-3)}
 .xray__support{margin-top:18px;font-weight:900;font-size:clamp(18px,2.2vw,26px);
@@ -272,7 +273,7 @@ ul,ol{list-style:none}
 .parts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:40px;
   background:var(--hair-2);border:1px solid var(--hair-2)}
 .part{background:var(--navy);padding:20px 20px 22px}
-.part__n{display:block;font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--red-2);margin-bottom:10px}
+.part__n{display:block;font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--red);margin-bottom:10px}
 .part h3{font-size:16px;font-weight:900;letter-spacing:-.01em;margin-bottom:5px}
 .part p{font-size:13.5px;color:var(--ink-2)}
 
@@ -287,9 +288,9 @@ ul,ol{list-style:none}
 .anatomy__stage img{width:100%}
 .hot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:34px;height:34px;
   border-radius:50%;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
-.hot span{width:11px;height:11px;border-radius:50%;background:var(--red-2);
+.hot span{width:11px;height:11px;border-radius:50%;background:var(--red);
   box-shadow:0 0 0 5px rgba(219,1,67,.28);transition:box-shadow .3s var(--ease),transform .3s var(--ease)}
-.hot::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--red-2);opacity:.5;animation:pulse 2.6s infinite}
+.hot::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--red);opacity:.5;animation:pulse 2.6s infinite}
 @keyframes pulse{0%{transform:scale(.5);opacity:.6}70%{transform:scale(1.25);opacity:0}100%{opacity:0}}
 .hot:hover span,.hot.is-on span{transform:scale(1.25);box-shadow:0 0 0 9px rgba(219,1,67,.34)}
 .hot.is-on::before{animation:none;opacity:1}
@@ -298,9 +299,9 @@ ul,ol{list-style:none}
   min-height:172px;cursor:pointer;opacity:.5;
   transition:border-color .3s,background .3s,opacity .3s}
 .anatomy__list li:hover{opacity:.8}
-.anatomy__list li.is-on{opacity:1;border-left-color:var(--red-2);
+.anatomy__list li.is-on{opacity:1;border-left-color:var(--red);
   background:linear-gradient(90deg,rgba(219,1,67,.14),transparent 85%)}
-.anatomy__list .n{font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--red-2)}
+.anatomy__list .n{font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--red)}
 .anatomy__list h3{font-size:15px;font-weight:700;margin:4px 0;letter-spacing:-.01em;line-height:1.2}
 .anatomy__list p{font-size:13px;color:var(--ink-2);max-height:0;overflow:hidden;opacity:0;
   transition:max-height .45s var(--ease),opacity .3s}
@@ -320,7 +321,7 @@ ul,ol{list-style:none}
 .spectable > div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:15px 2px;border-bottom:1px solid var(--hair-2)}
 .spectable dt{font-size:14px;color:var(--ink-3)}
 .spectable dd{font-size:15px;font-weight:700;text-align:right}
-.spectable > div:last-child dd{color:var(--red-2)}
+.spectable > div:last-child dd{color:var(--red)}
 
 /* ==========================================================================
    COMPARATIVO
@@ -340,7 +341,7 @@ ul,ol{list-style:none}
 .vsrow em:last-child{color:var(--ink);font-weight:700}
 .vsrow--head{background:rgba(255,255,255,.03)}
 .vsrow--head b{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-.vsrow--head b.is-og{color:var(--red-2)}
+.vsrow--head b.is-og{color:var(--red)}
 
 /* ==========================================================================
    CARDS
@@ -361,7 +362,7 @@ ul,ol{list-style:none}
    ========================================================================== */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;background:var(--hair-2)}
 .step{background:var(--black-2);padding:32px 26px 36px}
-.step__n{display:block;font-family:var(--serif);font-weight:300;font-size:40px;line-height:1;color:var(--red-2);margin-bottom:18px}
+.step__n{display:block;font-family:var(--serif);font-weight:300;font-size:40px;line-height:1;color:var(--red);margin-bottom:18px}
 .step h3{font-size:18px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
 .step p{font-size:14.5px;color:var(--ink-2)}
 
@@ -376,7 +377,7 @@ ul,ol{list-style:none}
 .assur{display:grid;gap:12px;margin-top:32px}
 .assur li{position:relative;padding-left:26px;font-size:15px;color:var(--ink-2)}
 .assur li::before{content:"";position:absolute;left:0;top:.42em;width:12px;height:7px;
-  border-left:1.5px solid var(--red-2);border-bottom:1.5px solid var(--red-2);transform:rotate(-45deg)}
+  border-left:1.5px solid var(--red);border-bottom:1.5px solid var(--red);transform:rotate(-45deg)}
 .formside__alt{margin-top:38px;padding-top:24px;border-top:1px solid var(--hair-2)}
 .formside__alt .label{margin-bottom:14px}
 .altlink{display:inline-block;margin-right:18px;font-size:14px;font-weight:700;
@@ -392,7 +393,7 @@ ul,ol{list-style:none}
 .fstep{border:0;display:none}
 .fstep.is-on{display:block;animation:fadein .45s var(--ease)}
 @keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.fstep__t{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--red-2);font-weight:700;margin-bottom:22px}
+.fstep__t{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:22px}
 .field{margin-bottom:20px}
 .field-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .field label,.field .lbl{display:block;font-size:13.5px;font-weight:500;color:var(--ink-2);margin-bottom:8px}
@@ -410,8 +411,8 @@ ul,ol{list-style:none}
   padding:13px 16px;font-size:14.5px;color:var(--ink-2);transition:border-color .2s,background .2s,color .2s}
 .opt:hover{border-color:rgba(255,255,255,.28)}
 .opt input{appearance:none;width:16px;height:16px;border:1.5px solid var(--ink-3);border-radius:50%;flex:none;position:relative;cursor:pointer}
-.opt input:checked{border-color:var(--red-2)}
-.opt input:checked::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--red-2)}
+.opt input:checked{border-color:var(--red)}
+.opt input:checked::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--red)}
 .opt:has(input:checked){border-color:var(--red);background:rgba(219,1,67,.12);color:var(--ink)}
 .consent{display:flex;align-items:flex-start;gap:12px;margin-top:6px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
 .consent input{appearance:none;width:17px;height:17px;border:1.5px solid var(--ink-3);border-radius:3px;flex:none;margin-top:2px;position:relative;cursor:pointer}
@@ -426,7 +427,7 @@ ul,ol{list-style:none}
 .fprivacy{font-size:12px;color:var(--ink-3);margin-top:16px;text-align:center}
 .fdone{text-align:center;padding:36px 10px}
 .fdone__mark{width:60px;height:60px;border-radius:50%;background:rgba(219,1,67,.18);border:1px solid var(--red);
-  color:var(--red-2);display:grid;place-items:center;font-size:26px;margin:0 auto 22px}
+  color:var(--red);display:grid;place-items:center;font-size:26px;margin:0 auto 22px}
 .fdone h3{font-size:26px;font-weight:900;letter-spacing:-.02em;margin-bottom:12px}
 .fdone p{color:var(--ink-2);max-width:44ch;margin:0 auto 26px}
 
@@ -440,7 +441,7 @@ ul,ol{list-style:none}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary:hover{color:var(--red-2)}
 .faq summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;
-  border-right:1.5px solid var(--red-2);border-bottom:1.5px solid var(--red-2);
+  border-right:1.5px solid var(--red);border-bottom:1.5px solid var(--red);
   transform:translateY(-70%) rotate(45deg);transition:transform .3s var(--ease)}
 .faq details[open] summary::after{transform:translateY(-25%) rotate(225deg)}
 .faq p{padding:0 60px 26px 0;color:var(--ink-2);max-width:78ch}
@@ -458,7 +459,7 @@ ul,ol{list-style:none}
   background:radial-gradient(70% 70% at 50% 55%,rgba(5,5,6,.72) 0%,rgba(5,5,6,.92) 70%,var(--black) 100%)}
 .closer__in{position:relative;z-index:2}
 .closer__h{font-weight:900;font-size:clamp(32px,6vw,76px);line-height:.95;letter-spacing:-.04em;text-transform:uppercase}
-.closer__s{font-weight:900;font-style:italic;color:var(--red-2);font-size:clamp(32px,6vw,76px);
+.closer__s{font-weight:900;font-style:italic;color:var(--red);font-size:clamp(32px,6vw,76px);
   line-height:.95;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:34px}
 .closer .btn{margin-inline:auto}
 
