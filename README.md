@@ -135,8 +135,11 @@ python prepare-images.py
 O banner tem 340svh de altura e o miolo fica preso na tela (`position: sticky`).
 São três clipes em `assets/video/` (6s, 6s e 8s), 20 segundos ao todo. Eles
 **não tocam sozinhos**: a rolagem é que avança a cena descendo e retrocede
-subindo. A posição do scroll define o quadro exato e qual das cinco frases
-aparece por cima. O título sai de cena logo no começo.
+subindo. A posição do scroll define o quadro exato. O título sai de cena logo no
+começo, e o escurecimento sobre o vídeo afrouxa junto (de 1 para 0,34) para a
+imagem aparecer quase limpa. As cinco frases só entram no **último clipe**, o
+de dentro do cockpit — nos dois primeiros, o capacete e a pista pelo visor
+ficam sem texto nenhum.
 
 Vários navegadores só renderizam um seek depois que o vídeo foi tocado ao
 menos uma vez — por isso o código dá um `play()` seguido de `pause()` na

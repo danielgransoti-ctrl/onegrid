@@ -124,7 +124,7 @@ ul,ol{list-style:none}
    ========================================================================== */
 /* A secao e alta; o miolo fica preso na tela enquanto a pagina rola por baixo.
    A posicao do scroll avanca os quadros do video — ele nao toca sozinho. */
-.hero{position:relative;height:340svh}
+.hero{position:relative;height:400svh}
 .hero.is-static{height:auto}
 .hero__sticky{position:sticky;top:0;height:100svh;overflow:hidden;
   display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px}
@@ -153,13 +153,16 @@ ul,ol{list-style:none}
 .hero__hint.is-off{opacity:0}
 .hero__in{transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .hero__in.is-off{opacity:0;transform:translateY(-24px);pointer-events:none}
+/* O escurecimento existe para o titulo ficar legivel. Assim que o titulo sai
+   de cena, ele afrouxa e o video aparece quase limpo. */
 .hero__bg::after{
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;transition:opacity .6s var(--ease);
   background:
-    radial-gradient(115% 85% at 78% 42%,rgba(219,1,67,.16) 0%,transparent 58%),
-    linear-gradient(180deg,rgba(5,5,6,.88) 0%,rgba(5,5,6,.30) 30%,rgba(5,5,6,.72) 70%,var(--black) 100%),
-    linear-gradient(90deg,rgba(5,5,6,.96) 0%,rgba(5,5,6,.80) 34%,rgba(5,5,6,.18) 72%,transparent 100%);
+    radial-gradient(115% 85% at 78% 42%,rgba(219,1,67,.10) 0%,transparent 58%),
+    linear-gradient(180deg,rgba(5,5,6,.72) 0%,rgba(5,5,6,.12) 34%,rgba(5,5,6,.44) 74%,rgba(5,5,6,.94) 100%),
+    linear-gradient(90deg,rgba(5,5,6,.88) 0%,rgba(5,5,6,.56) 34%,rgba(5,5,6,.08) 70%,transparent 100%);
 }
+.hero.is-playing .hero__bg::after{opacity:.34}
 /* Mesma caixa do cabecalho, para o titulo comecar exatamente sob a logo.
    O width:100% e necessario: sendo item flex com margem automatica, o bloco
    encolheria ate o texto e sairia do alinhamento. */

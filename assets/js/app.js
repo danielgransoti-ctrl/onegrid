@@ -201,8 +201,10 @@ if (hero) {
       const alcance = hero.offsetHeight - window.innerHeight;
       const p = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / alcance));
 
-      heroIn.classList.toggle("is-off", p > INICIO + 0.06);
+      const rodando = p > INICIO + 0.06;
+      heroIn.classList.toggle("is-off", rodando);
       heroHint.classList.toggle("is-off", p > INICIO);
+      hero.classList.toggle("is-playing", rodando);
 
       // posicao dentro dos 20s, e em qual dos tres clipes ela cai
       const tempo = Math.max(0, (p - INICIO) / (1 - INICIO)) * total;
@@ -224,8 +226,12 @@ if (hero) {
       const alvo = Math.max(0, Math.min(dentro, duracoes[atual] - 0.05));
       if (v.readyState >= 1 && Math.abs(v.currentTime - alvo) > 0.03) v.currentTime = alvo;
 
-      // as frases se revezam ao longo da sequencia
-      const faixa = Math.max(0, Math.min(1, (p - 0.2) / 0.72));
+      // As frases so entram no ultimo clipe, o de dentro do cockpit. Nos dois
+      // primeiros — o capacete e a pista pelo visor — o video fica limpo.
+      const inicioFrases = soma / total * (1 - INICIO) + INICIO;
+      const faixa = atual < duracoes.length - 1
+        ? 0
+        : Math.max(0, Math.min(1, (p - inicioFrases) / (0.97 - inicioFrases)));
       const ativa = faixa <= 0 || faixa >= 1 ? -1 : Math.min(lines.length - 1, Math.floor(faixa * lines.length));
       lines.forEach((l, i) => l.classList.toggle("is-on", i === ativa));
     };
