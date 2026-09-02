@@ -162,7 +162,10 @@ ul,ol{list-style:none}
 .hero__in{position:relative;z-index:2;padding-bottom:clamp(40px,7vw,84px);
   /* mesma caixa do cabecalho, para o titulo comecar sob a logo */
   max-width:1400px;margin-inline:auto;padding-inline:var(--pad)}
-.hero__h1{font-weight:900;font-size:clamp(46px,10.5vw,132px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;margin:18px 0 0}
+/* O titulo tambem e limitado pela altura da janela: em tela baixa ou estreita
+   ele encolhe em vez de estourar para cima, por baixo do menu. */
+.hero__h1{font-weight:900;font-size:min(clamp(36px,7.6vw,100px),13vh);
+  line-height:.88;letter-spacing:-.045em;text-transform:uppercase;margin:18px 0 0}
 .hero__h1 em{font-style:italic;color:var(--red-2);display:inline-block}
 .hero__lead{color:var(--ink-2);max-width:48ch;margin-top:26px;font-size:clamp(16px,1.5vw,19px)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}

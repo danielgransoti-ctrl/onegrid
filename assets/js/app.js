@@ -176,37 +176,38 @@ if (hero) {
     hero.classList.add("has-video");
     shots.forEach(v => { v.src = v.dataset.src; v.load(); });
 
-    const duracoes = [6.04, 6.04, 8.04];      // lidas dos proprios arquivos
-    const total = duracoes.reduce((a, b) => a + b, 0);
-    const INICIO = 0.06;                       // antes disso, so o titulo
+    // Os clipes tocam de verdade — o scroll decide qual deles esta em cena,
+    // nao o quadro. Alguns navegadores so liberam o autoplay depois de um
+    // gesto, entao tentamos de novo no primeiro toque ou rolagem.
+    const tocar = el => { const t = el.play(); if (t) t.catch(() => {}); };
+    const destravar = () => shots.forEach(v => { if (v.classList.contains("is-on")) tocar(v); });
+    ["pointerdown", "touchstart", "keydown", "wheel", "scroll"].forEach(ev =>
+      window.addEventListener(ev, destravar, { once: true, passive: true }));
+
+    const INICIO = 0.06;   // antes disso, so o titulo
     let ultimo = -1;
 
     const desenhar = () => {
       const alcance = hero.offsetHeight - window.innerHeight;
       const p = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / alcance));
 
-      // titulo sai de cena assim que a sequencia comeca
-      const saida = Math.max(0, Math.min(1, (p - INICIO) / 0.12));
-      heroIn.classList.toggle("is-off", saida > 0.5);
+      heroIn.classList.toggle("is-off", p > INICIO + 0.06);
       heroHint.classList.toggle("is-off", p > INICIO);
 
-      // tempo global dentro dos tres clipes
-      const t = Math.max(0, (p - INICIO) / (1 - INICIO)) * total;
-      let acc = 0, atual = 0, dentro = 0;
-      for (let i = 0; i < duracoes.length; i++) {
-        if (t <= acc + duracoes[i] || i === duracoes.length - 1) { atual = i; dentro = t - acc; break; }
-        acc += duracoes[i];
-      }
+      // um clipe por terco da sequencia
+      const avanco = Math.max(0, (p - INICIO) / (1 - INICIO));
+      const atual = Math.min(shots.length - 1, Math.floor(avanco * shots.length));
       if (atual !== ultimo) {
-        shots.forEach((v, i) => v.classList.toggle("is-on", i === atual));
+        shots.forEach((v, i) => {
+          const ligado = i === atual;
+          v.classList.toggle("is-on", ligado);
+          if (ligado) tocar(v); else v.pause();
+        });
         ultimo = atual;
       }
-      const v = shots[atual];
-      const alvo = Math.max(0, Math.min(dentro, duracoes[atual] - 0.05));
-      if (v.readyState >= 2 && Math.abs(v.currentTime - alvo) > 0.04) v.currentTime = alvo;
 
-      // as frases se revezam na segunda metade da sequencia
-      const faixa = Math.max(0, Math.min(1, (p - 0.22) / 0.7));
+      // as frases se revezam ao longo da sequencia
+      const faixa = Math.max(0, Math.min(1, (p - 0.2) / 0.72));
       const ativa = faixa <= 0 || faixa >= 1 ? -1 : Math.min(lines.length - 1, Math.floor(faixa * lines.length));
       lines.forEach((l, i) => l.classList.toggle("is-on", i === ativa));
     };
