@@ -533,6 +533,36 @@ ul,ol{list-style:none}
 }
 @media (max-width:760px){
   body{font-size:16px}
+
+  /* ---- Alvos de toque: no dedo, nada abaixo de 44px ---- */
+  .lang{gap:2px}
+  .lang__btn{min-width:44px;min-height:44px;display:grid;place-items:center;font-size:13px}
+  .hdr__logo{display:grid;align-items:center;min-height:44px}
+  .burger{width:44px;height:44px}
+  .burger span{left:11px;right:11px}
+  .burger span:nth-child(1){top:18px}
+  .burger span:nth-child(2){top:25px}
+  .altlink{min-height:44px;display:inline-flex;align-items:center;margin-right:24px}
+  .ftr__nav{gap:0}
+  .ftr__nav a,.ftr__contact a{min-height:44px;display:inline-flex;align-items:center}
+  .faq summary{padding-block:20px}
+  .hdr__nav a{padding:16px 0}
+
+  /* ---- Corte tecnico: a foto e panoramica e no celular fica com ~190px de
+         altura. Os pontos ficariam menores que o dedo e cobrindo a imagem,
+         entao saem de cena e a lista aparece inteira, ja aberta. ---- */
+  .hot{display:none}
+  .anatomy__stage{border-radius:var(--r)}
+
+  /* ---- Altura da pagina: as fotos verticais empilhadas deixavam a leitura
+         longa demais no celular. Aqui elas ficam mais baixas. ---- */
+  .split__media img{aspect-ratio:4/3}
+  .card__img{aspect-ratio:3/2}
+  .parts{grid-template-columns:1fr 1fr}
+  .part{padding:16px 14px 18px}
+  .part p{font-size:13px}
+  .versus img{max-height:64svh;object-fit:cover}
+  .atelier__media img{aspect-ratio:16/11}
   .hero{min-height:94svh}
   .hero__bg img{object-position:64% 50%}
   .hero__bg::after{background:
@@ -541,13 +571,20 @@ ul,ol{list-style:none}
   .split,.split--rev{grid-template-columns:1fr;gap:24px}
   .split--rev .split__media{order:0}
   .split__media img{aspect-ratio:5/4}
-  .cards,.steps,.parts{grid-template-columns:1fr}
+  .cards,.steps{grid-template-columns:1fr}
   .spectable{grid-template-columns:1fr}
   .hero__lines p{font-size:clamp(24px,7.5vw,40px)}
   .anatomy{grid-template-columns:1fr}
   .anatomy__list li{min-height:0}
   .field-2{grid-template-columns:1fr}
-  .ticker li{flex-basis:50%;padding:15px var(--pad)}
+  /* Cinco itens em duas colunas deixavam o ultimo orfao numa linha inteira.
+     No celular a faixa desliza na horizontal e todos ficam na mesma linha. */
+  .ticker{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+    scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .ticker::-webkit-scrollbar{display:none}
+  .ticker li{flex:0 0 auto;min-width:0;padding:14px 22px;scroll-snap-align:start}
+  .ticker li:first-child{padding-left:var(--pad)}
+  .ticker li:last-child{padding-right:var(--pad)}
   .ftr__in{grid-template-columns:1fr;gap:34px}
   .faq p{padding-right:0}
   .faqcta{flex-direction:column;align-items:flex-start}

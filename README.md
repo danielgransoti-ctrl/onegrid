@@ -104,6 +104,30 @@ página já abre traduzida.
 
 ---
 
+## Celular
+
+O que muda abaixo de 760px, e por quê:
+
+- **Alvos de toque com 44px.** PT/EN, hambúrguer, links do rodapé e os atalhos
+  de WhatsApp e e-mail tinham entre 19px e 25px de altura — impossível de
+  acertar com o dedo. Agora nenhum elemento clicável fica abaixo disso.
+- **Os pontos do corte técnico saem de cena.** A foto é panorâmica e no celular
+  fica com ~190px de altura; seis pontos ali ficariam menores que o dedo e
+  cobrindo a imagem. Em vez deles, a lista dos seis itens aparece inteira, já
+  com as descrições abertas.
+- **A faixa de destaques desliza na horizontal.** São cinco itens: em duas
+  colunas o último ficava órfão numa linha inteira. Deslizando, todos ficam na
+  mesma linha e a faixa cai de 244px para 80px.
+- **Fotos mais baixas.** Os blocos da experiência passam de 5/4 para 4/3, os
+  cards de ambientes para 3/2, e as oito peças do Ateliê ficam em duas colunas.
+  A página caiu de 23 para 21,8 telas em um iPhone 14.
+- **O vídeo do banner não é baixado.** São 9 MB; abaixo de 900px vale a foto.
+
+Testado em 360×740, 375×812 e 390×844, nos dois idiomas: sem rolagem
+horizontal, sem alvo de toque pequeno e com o título do banner em duas linhas.
+
+---
+
 ## Formulário de qualificação
 
 Três etapas, com validação e barra de progresso:
