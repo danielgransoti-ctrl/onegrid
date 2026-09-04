@@ -10,9 +10,6 @@ const SITE_CONFIG = {
   // Número do WhatsApp comercial, só dígitos, com DDI. Ex.: "5541999999999"
   whatsapp: "554391764658",
 
-  // E-mail que recebe as solicitações
-  email: "contato@onegridoficial.com.br",
-
   // Para onde o lead é enviado. Hoje: a planilha do Google, através do
   // Apps Script que está em apps-script-planilha.gs (como publicar, no README).
   // Vazio = o lead não sai do navegador de quem preencheu.
@@ -97,12 +94,6 @@ function syncContactLinks() {
   ["waLink", "ftrWa", "doneWa"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.href = wa;
-  });
-  ["mailLink", "ftrMail"].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.href = "mailto:" + SITE_CONFIG.email;
-    if (id === "ftrMail") el.textContent = SITE_CONFIG.email;
   });
 }
 

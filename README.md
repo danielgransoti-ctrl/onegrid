@@ -28,13 +28,15 @@ Tudo fica em `assets/js/app.js`, no topo do arquivo:
 
 ```js
 const SITE_CONFIG = {
-  whatsapp: "554391764658",                  // número comercial, só dígitos, com DDI
-  email:    "contato@onegridoficial.com.br", // e-mail que recebe as solicitações
+  whatsapp: "554391764658",   // número comercial, só dígitos, com DDI
   endpoint: "https://script.google.com/macros/s/AKfy.../exec",
   endpointTipo: "sheets",
   endpointHeaders: {}
 };
 ```
+
+O site não mostra e-mail. Quem quiser falar direto usa o WhatsApp; o resto
+passa pelo formulário.
 
 **O `endpoint`** é para onde o lead vai. Com `endpointTipo: "sheets"` ele fala
 com o Apps Script da planilha do Google (ver "Leads na planilha"); com
@@ -70,6 +72,23 @@ site-one-grid/
 A raiz do repositório **é** o site. O `.vercelignore` mantém fora do ar os
 scripts, o `_fontes/`, o `dist/` e o README — eles ficam versionados, mas não
 são publicados.
+
+---
+
+## Cache dos arquivos
+
+`vercel.json` guarda imagens, vídeos, fontes e a logo por um ano — são pesados
+e não mudam. Mas **CSS e JS ficam com `max-age=0, must-revalidate`**: o
+navegador pergunta ao servidor a cada visita e recebe um 304 se nada mudou.
+
+Isso é de propósito. Antes, `assets/(.*)` inteiro era `immutable` por um ano —
+o que fazia quem já tinha visitado o site continuar vendo o CSS e o JS antigos,
+sem nunca pedir a versão nova. Foi assim que a versão de celular pareceu não
+ter sido atualizada.
+
+Os links no `index.html` levam `?v=20260904`. Essa data existe só para furar
+os caches de um ano que ficaram nos navegadores antes da correção. Com os
+cabeçalhos de hoje ela não precisa mais ser trocada a cada publicação.
 
 ---
 
