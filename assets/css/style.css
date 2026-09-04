@@ -615,7 +615,7 @@ ul,ol{list-style:none}
   .hero__lead{margin-top:16px;font-size:15px}
   .hero__cta{margin-top:20px;gap:10px}
   .hero__price{margin-top:14px}
-  .hero__in{padding-bottom:58px}
+  .hero__hint{bottom:10px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}
