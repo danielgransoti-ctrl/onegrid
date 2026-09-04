@@ -13,13 +13,16 @@ const SITE_CONFIG = {
   // E-mail que recebe as solicitações
   email: "contato@onegridoficial.com.br",
 
-  // Endpoint que recebe o lead (RD Station, HubSpot, Zapier, Make, Formspree,
-  // API própria…). Deixe "" para o site funcionar sem back-end: nesse caso o
-  // lead é guardado no navegador e o cliente é levado ao WhatsApp já com o
-  // resumo preenchido.
+  // Para onde o lead é enviado. Hoje: a planilha do Google, através do
+  // Apps Script que está em apps-script-planilha.gs (como publicar, no README).
+  // Vazio = o lead não sai do navegador de quem preencheu.
   endpoint: "",
 
-  // Cabeçalhos extras do POST (ex.: { "Authorization": "Bearer ..." })
+  // "sheets" fala com o Apps Script do Google; "json" faz um POST comum,
+  // para RD Station, HubSpot, Zapier e afins.
+  endpointTipo: "sheets",
+
+  // Cabeçalhos extras, só no modo "json" (ex.: { "Authorization": "Bearer ..." })
   endpointHeaders: {}
 };
 
@@ -455,11 +458,23 @@ form.addEventListener("submit", async ev => {
 
   if (SITE_CONFIG.endpoint) {
     try {
-      await fetch(SITE_CONFIG.endpoint, {
-        method: "POST",
-        headers: Object.assign({ "Content-Type": "application/json" }, SITE_CONFIG.endpointHeaders),
-        body: JSON.stringify(data)
-      });
+      if (SITE_CONFIG.endpointTipo === "sheets") {
+        // O Apps Script do Google não responde à checagem de origem que o
+        // navegador faria com application/json. Com text/plain e no-cors o
+        // envio passa direto — não dá para ler a resposta, mas a linha entra.
+        await fetch(SITE_CONFIG.endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        });
+      } else {
+        await fetch(SITE_CONFIG.endpoint, {
+          method: "POST",
+          headers: Object.assign({ "Content-Type": "application/json" }, SITE_CONFIG.endpointHeaders),
+          body: JSON.stringify(data)
+        });
+      }
     } catch (e) {
       storeLocally(data);
     }

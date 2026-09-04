@@ -35,10 +35,11 @@ const SITE_CONFIG = {
 };
 ```
 
-**O `endpoint`** aceita qualquer URL que receba `POST` com JSON: RD Station,
-HubSpot, Zapier, Make, Formspree ou uma API própria. Enquanto ficar vazio
-(`""`), o site continua funcionando: o lead é guardado no navegador e o
-formulário leva a pessoa ao WhatsApp já com o resumo preenchido.
+**O `endpoint`** é para onde o lead vai. Com `endpointTipo: "sheets"` ele fala
+com o Apps Script da planilha do Google (ver "Leads na planilha"); com
+`"json"`, faz um POST comum e serve para RD Station, HubSpot, Zapier e afins.
+Enquanto ficar vazio (`""`), **o lead não sai do navegador de quem preencheu** —
+a pessoa vê "solicitação enviada" e ninguém recebe nada.
 
 O payload enviado inclui todos os campos do formulário mais `idioma`,
 `pagina`, `enviado_em` e as UTMs da URL (`utm_source`, `utm_medium`,
@@ -139,6 +140,59 @@ Três etapas, com validação e barra de progresso:
 As faixas de investimento são o principal filtro de qualificação:
 até R$ 299 mil · R$ 300–500 mil · R$ 500 mil–1 milhão · acima de R$ 1 milhão ·
 "quero entender melhor".
+
+---
+
+## Leads na planilha
+
+Os leads vão para esta planilha:
+<https://docs.google.com/spreadsheets/d/18-PZ0bZWSv5VNABz62LSsKtlk7Sxv996E_T3A8z0rA0/edit>
+
+Um site estático não escreve direto no Google Sheets. No meio entra um **Apps
+Script**, que roda dentro da própria planilha — gratuito, sem serviço de
+terceiros e sem conta nova. O código está em `apps-script-planilha.gs`.
+
+### Publicar o Apps Script (uma vez só)
+
+1. Abra a planilha → **Extensões → Apps Script**.
+2. Apague o conteúdo do `Código.gs` e cole tudo o que está em
+   `apps-script-planilha.gs`. Salve.
+3. **Implantar → Nova implantação** → engrenagem → **App da Web**.
+4. Preencha:
+   - *Executar como*: **Eu**
+   - *Quem pode acessar*: **Qualquer pessoa**
+5. **Implantar**. O Google vai pedir autorização — aceite. Na tela de aviso,
+   clique em *Avançado* → *Acessar (não seguro)*: é o seu próprio script.
+6. Copie a **URL do app da Web**. Ela termina em `/exec`.
+
+> *Quem pode acessar: Qualquer pessoa* é o que permite o site enviar. Ninguém
+> consegue **ler** a planilha por essa URL — o script só aceita gravação.
+
+### Ligar no site
+
+Em `assets/js/app.js`, cole a URL:
+
+```js
+endpoint: "https://script.google.com/macros/s/AKfy.../exec",
+```
+
+Um `git push` e está valendo.
+
+### Como conferir
+
+Abra a URL do `/exec` no navegador. Se aparecer
+`{"ok":true,"aviso":"Endpoint ativo..."}`, está publicado. Depois preencha o
+formulário no site e veja a linha entrar na planilha.
+
+### As colunas
+
+O cabeçalho é criado sozinho no primeiro lead, em 24 colunas: data e hora de
+Brasília, os catorze campos do formulário, o idioma em que a pessoa navegou, a
+página de origem e as sete etiquetas de campanha (`utm_source`, `utm_medium`,
+`utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`).
+
+Para mudar a ordem ou o nome das colunas, edite a lista `COLUNAS` no topo do
+Apps Script e cole de novo — vale para os leads seguintes.
 
 ---
 
