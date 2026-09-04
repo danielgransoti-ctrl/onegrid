@@ -22,15 +22,16 @@ Não há back-end obrigatório.
 
 ---
 
-## Antes de publicar — 3 ajustes
+## Configuração
 
 Tudo fica em `assets/js/app.js`, no topo do arquivo:
 
 ```js
 const SITE_CONFIG = {
-  whatsapp: "5541999999999",                 // 1) número comercial, só dígitos, com DDI
-  email:    "contato@onegridoficial.com.br", // 2) e-mail que recebe as solicitações
-  endpoint: "",                              // 3) para onde o lead é enviado
+  whatsapp: "554391764658",                  // número comercial, só dígitos, com DDI
+  email:    "contato@onegridoficial.com.br", // e-mail que recebe as solicitações
+  endpoint: "https://script.google.com/macros/s/AKfy.../exec",
+  endpointTipo: "sheets",
   endpointHeaders: {}
 };
 ```
@@ -38,7 +39,7 @@ const SITE_CONFIG = {
 **O `endpoint`** é para onde o lead vai. Com `endpointTipo: "sheets"` ele fala
 com o Apps Script da planilha do Google (ver "Leads na planilha"); com
 `"json"`, faz um POST comum e serve para RD Station, HubSpot, Zapier e afins.
-Enquanto ficar vazio (`""`), **o lead não sai do navegador de quem preencheu** —
+Se ficar vazio (`""`), **o lead não sai do navegador de quem preencheu** —
 a pessoa vê "solicitação enviada" e ninguém recebe nada.
 
 O payload enviado inclui todos os campos do formulário mais `idioma`,
@@ -170,13 +171,20 @@ terceiros e sem conta nova. O código está em `apps-script-planilha.gs`.
 
 ### Ligar no site
 
-Em `assets/js/app.js`, cole a URL:
+Já está ligado: a URL do `/exec` está em `SITE_CONFIG.endpoint`, em
+`assets/js/app.js`. Se um dia você criar uma implantação nova (URL diferente),
+é ali que se troca.
 
-```js
-endpoint: "https://script.google.com/macros/s/AKfy.../exec",
-```
+### Ao mudar o `.gs`
 
-Um `git push` e está valendo.
+Editar o código no Apps Script **não** muda o que está no ar. Depois de salvar:
+**Implantar → Gerenciar implantações →** lápis **→ Versão: Nova versão →
+Implantar**. A URL continua a mesma.
+
+> Uma armadilha da planilha: valores que começam com `+`, `-`, `=` ou `@` são
+> lidos como fórmula. Um telefone `+55 43 ...` virava `#ERROR!`. Por isso o
+> script grava cada linha como texto antes de escrever — não remova o
+> `setNumberFormat('@')`.
 
 ### Como conferir
 

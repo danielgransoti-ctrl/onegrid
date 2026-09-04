@@ -37,10 +37,18 @@ var COLUNAS = [
   ['fbclid',               'fbclid']
 ];
 
+var FUSO = 'America/Sao_Paulo';
+
 function doPost(e) {
   try {
     var dados = JSON.parse(e.postData.contents);
-    var aba = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    var planilha = SpreadsheetApp.getActiveSpreadsheet();
+    var aba = planilha.getSheets()[0];
+
+    // A hora gravada é a do fuso da planilha; garante que seja Brasília.
+    if (planilha.getSpreadsheetTimeZone() !== FUSO) {
+      planilha.setSpreadsheetTimeZone(FUSO);
+    }
 
     // Na primeira vez, escreve o cabeçalho e congela a linha.
     if (aba.getLastRow() === 0) {
@@ -53,14 +61,22 @@ function doPost(e) {
       aba.setFrozenRows(1);
     }
 
-    // O site manda a hora em UTC; aqui vira horário de Brasília.
-    dados._quando = Utilities.formatDate(new Date(), 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm');
     dados._consentimento = dados.consentimento ? 'Sim' : 'Não';
 
-    aba.appendRow(COLUNAS.map(function (c) {
+    var linha = COLUNAS.map(function (c) {
       var v = dados[c[1]];
       return (v === undefined || v === null) ? '' : String(v);
-    }));
+    });
+    linha[0] = new Date();
+
+    // Tudo entra como texto. Sem isso, um telefone digitado "+55 43 ..." é
+    // lido como fórmula pela planilha e a célula vira #ERROR!. O mesmo vale
+    // para qualquer resposta que a pessoa comece com +, -, = ou @.
+    var n = aba.getLastRow() + 1;
+    var faixa = aba.getRange(n, 1, 1, linha.length);
+    faixa.setNumberFormat('@');
+    aba.getRange(n, 1).setNumberFormat('dd/MM/yyyy HH:mm');  // menos a data
+    faixa.setValues([linha]);
 
     return responder({ ok: true });
   } catch (erro) {

@@ -16,7 +16,7 @@ const SITE_CONFIG = {
   // Para onde o lead é enviado. Hoje: a planilha do Google, através do
   // Apps Script que está em apps-script-planilha.gs (como publicar, no README).
   // Vazio = o lead não sai do navegador de quem preencheu.
-  endpoint: "",
+  endpoint: "https://script.google.com/macros/s/AKfycbykw-GKNrHmuJb6XAXSuWdOPLhQoxLc6jepBB1pSg9q4QBbn7cHC8dC2Pi3obXma6CV3g/exec",
 
   // "sheets" fala com o Apps Script do Google; "json" faz um POST comum,
   // para RD Station, HubSpot, Zapier e afins.
