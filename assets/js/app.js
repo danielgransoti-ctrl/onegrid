@@ -8,7 +8,7 @@
    -------------------------------------------------------------------------- */
 const SITE_CONFIG = {
   // Número do WhatsApp comercial, só dígitos, com DDI. Ex.: "5541999999999"
-  whatsapp: "5541999999999",
+  whatsapp: "554391764658",
 
   // E-mail que recebe as solicitações
   email: "contato@onegridoficial.com.br",
