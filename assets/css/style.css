@@ -593,9 +593,11 @@ ul,ol{list-style:none}
   .anatomy__list p{max-height:none;opacity:1}
   .anatomy__list li{opacity:1}
   .hero__cta .btn{flex:1 1 100%}
-  /* "Scroll. Lights out." anuncia a sequencia de video, que no celular nao
-     roda. E a frase caia por cima do preco, no pe da primeira tela. */
-  .hero__hint{display:none}
+  /* O preco caia em cima do "Scroll. Lights out.". O respiro no pe do bloco
+     afasta os dois; a dica fica, porque no celular a sequencia tambem roda. */
+  .hero__in{padding-bottom:72px}
+  /* Os arquivos do celular ja vem cortados em retrato: o centro e o centro. */
+  .hero__vid{object-position:50% 50%}
   .vsrow{grid-template-columns:1fr;gap:4px;padding:14px 16px}
   .vsrow span{margin-bottom:4px}
   .vsrow--head{display:none}
@@ -613,6 +615,7 @@ ul,ol{list-style:none}
   .hero__lead{margin-top:16px;font-size:15px}
   .hero__cta{margin-top:20px;gap:10px}
   .hero__price{margin-top:14px}
+  .hero__in{padding-bottom:58px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;transition-duration:.01ms !important}

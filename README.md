@@ -142,7 +142,11 @@ O que muda abaixo de 760px, e por quê:
 - **Fotos mais baixas.** Os blocos da experiência passam de 5/4 para 4/3, os
   cards de ambientes para 3/2, e as oito peças do Ateliê ficam em duas colunas.
   A página caiu de 23 para 21,8 telas em um iPhone 14.
-- **O vídeo do banner não é baixado.** São 9 MB; abaixo de 900px vale a foto.
+- **A sequência de vídeo também roda no celular**, com arquivos próprios:
+  os mesmos três planos cortados em retrato (540×960) e com keyframe a cada
+  meio segundo, porque sem isso cada avanço da rolagem engasga. São 1,8 MB
+  no total, contra 9,1 MB da versão de computador. Ficam de fora em conexão
+  econômica e para quem pediu menos animação — aí vale a foto.
 
 Testado em 360×740, 375×812 e 390×844, nos dois idiomas: sem rolagem
 horizontal, sem alvo de toque pequeno e com o título do banner em duas linhas.

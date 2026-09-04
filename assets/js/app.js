@@ -155,20 +155,25 @@ if (hero) {
   const heroIn = document.getElementById("heroIn");
   const heroHint = document.getElementById("heroHint");
 
-  // Video pesa ~9 MB. Fica de fora em tela pequena, em conexao economica e
-  // para quem pediu menos animacao — nesses casos a foto continua valendo.
-  const telaGrande = window.matchMedia("(min-width: 900px)").matches;
+  // No celular a sequencia roda com os arquivos de 1,8 MB: mesmos planos,
+  // cortados em retrato e com keyframe a cada meio segundo, senao cada seek
+  // engasga. No computador vao os de 9,1 MB, em 1080p. Fica de fora so em
+  // conexao economica e para quem pediu menos animacao — ai vale a foto.
+  const noCelular = window.matchMedia("(max-width: 899px)").matches;
   const menosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const economiaDados = navigator.connection && navigator.connection.saveData;
 
-  const temVideo = shots.length > 0 && shots.every(v => v.dataset.src);
+  const fonte = v => (noCelular && v.dataset.srcMob) || v.dataset.src;
+  const temVideo = shots.length > 0 && shots.every(fonte);
 
-  if (!temVideo || !telaGrande || menosMovimento || economiaDados) {
+  if (!temVideo || menosMovimento || economiaDados) {
     hero.classList.add("is-static");
     shots.forEach(v => v.remove());
   } else {
-    hero.classList.add("has-video");
-    shots.forEach(v => { v.src = v.dataset.src; v.load(); });
+    // A foto so sai de cena quando o primeiro clipe tem imagem. Trocar antes
+    // deixaria a tela preta enquanto o video baixa, o que no 4G demora.
+    shots[0].addEventListener("loadeddata", () => hero.classList.add("has-video"), { once: true });
+    shots.forEach(v => { v.src = fonte(v); v.load(); });
 
     // Os clipes nao tocam sozinhos: a rolagem e que avanca (descendo) ou
     // retrocede (subindo) a cena. Sao 20s de video distribuidos ao longo da

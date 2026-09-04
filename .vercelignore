@@ -4,3 +4,4 @@ dist/
 *.py
 README.md
 .gitignore
+*.gs
