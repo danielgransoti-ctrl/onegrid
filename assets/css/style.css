@@ -593,6 +593,9 @@ ul,ol{list-style:none}
   .anatomy__list p{max-height:none;opacity:1}
   .anatomy__list li{opacity:1}
   .hero__cta .btn{flex:1 1 100%}
+  /* "Scroll. Lights out." anuncia a sequencia de video, que no celular nao
+     roda. E a frase caia por cima do preco, no pe da primeira tela. */
+  .hero__hint{display:none}
   .vsrow{grid-template-columns:1fr;gap:4px;padding:14px 16px}
   .vsrow span{margin-bottom:4px}
   .vsrow--head{display:none}
